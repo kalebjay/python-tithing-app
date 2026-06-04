@@ -90,7 +90,7 @@ class TithingApp(ctk.CTk):
         # Main Titles
         title_lbl = ctk.CTkLabel(
             self.main_container, 
-            text="SYSTEM OVERVIEW", 
+            text="Yearly Overview", 
             font=("Segoe UI", 24, "bold"),
             text_color="#f0f2f5"
         )

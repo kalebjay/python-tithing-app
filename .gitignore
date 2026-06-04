@@ -1,0 +1,17 @@
+# Python compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Application data and secrets
+tithing_data.json
+.env
+
+# IDE settings
+.vscode/
+.idea/

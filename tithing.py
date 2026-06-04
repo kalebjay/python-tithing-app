@@ -17,7 +17,7 @@ class TithingApp(ctk.CTk):
         super().__init__()
 
         # Window Setup
-        self.title("Tithing Dashboard 2026 [CYBER-LINK v1.0]")
+        self.title("Tithing Dashboard 2026 [CYBER-LINK v1.0]") # Main Window Title
         self.geometry("780x850")
         
         # Core Cyberpunk Theme Enforcement
@@ -87,10 +87,10 @@ class TithingApp(ctk.CTk):
     def show_dashboard_view(self):
         self.clear_view()
 
-        # Main Titles
+        # Main Dashboard Heading
         title_lbl = ctk.CTkLabel(
             self.main_container, 
-            text="Yearly Overview", 
+            text="Yearly Overview", # Section Header
             font=("Segoe UI", 24, "bold"),
             text_color="#f0f2f5"
         )
@@ -98,7 +98,7 @@ class TithingApp(ctk.CTk):
 
         total_lbl = ctk.CTkLabel(
             self.main_container, 
-            text=f"Total Contributions (Rounded): ${self.running_total:,.2f}", 
+            text=f"Total Contributions (Rounded): ${self.running_total:,.2f}", # Aggregated UI display
             font=("Segoe UI", 18, "bold"),
             text_color="#ff2e54" # Neon Crimson
         )
@@ -121,17 +121,17 @@ class TithingApp(ctk.CTk):
             card = ctk.CTkFrame(grid_frame, fg_color="#161920", border_color="#2a2f3d", border_width=1, corner_radius=8)
             card.grid(row=row, column=col, padx=6, pady=6, sticky="nsew")
 
-            lbl_month = ctk.CTkLabel(card, text=month, font=("Segoe UI", 16, "bold"), text_color="#ffffff")
+            lbl_month = ctk.CTkLabel(card, text=month, font=("Segoe UI", 16, "bold"), text_color="#ffffff") # Month identifier
             lbl_month.pack(anchor="w", padx=12, pady=(12, 2))
 
             target_val = self.get_tithe_goal_rounded(month)
-            lbl_target = ctk.CTkLabel(card, text=f"Tithe: ${target_val}", font=("Segoe UI", 13, "bold"), text_color="#ff3366")
+            lbl_target = ctk.CTkLabel(card, text=f"Tithe: ${target_val}", font=("Segoe UI", 13, "bold"), text_color="#ff3366") # Calculated target
             lbl_target.pack(anchor="w", padx=12, pady=(0, 10))
 
             # Access Action Button
             btn = ctk.CTkButton(
                 card, 
-                text="Access Segment", 
+                text="Access Segment", # Navigation button text
                 fg_color="transparent",
                 text_color="#00f2fe", # Cyan Interactive Elements
                 hover_color="#1c212b",
@@ -147,7 +147,7 @@ class TithingApp(ctk.CTk):
 
         title_lbl = ctk.CTkLabel(
             self.main_container, 
-            text=f"{month} Data Stream", 
+            text=f"{month} Data Stream", # Sub-view header indicating current data context
             font=("Segoe UI", 26, "bold"),
             text_color="#f0f2f5"
         )
@@ -161,7 +161,7 @@ class TithingApp(ctk.CTk):
         input_frame = ctk.CTkFrame(pane, fg_color="transparent")
         input_frame.pack(fill="x", padx=20, pady=15)
 
-        lbl_prompt = ctk.CTkLabel(input_frame, text="Input Transaction Value ($):", font=("Segoe UI", 13), text_color="#c9d1d9")
+        lbl_prompt = ctk.CTkLabel(input_frame, text="Input Transaction Value ($):", font=("Segoe UI", 13), text_color="#c9d1d9") # Entry prompt
         lbl_prompt.pack(anchor="w", pady=(0, 5))
 
         # Horizontal Row layout container for Entry + Button
@@ -185,7 +185,7 @@ class TithingApp(ctk.CTk):
 
         btn_inject = ctk.CTkButton(
             row_entry_frame, 
-            text="Inject Entry", 
+            text="Inject Entry", # Submission button text
             fg_color="#005f73", 
             text_color="#00f2fe", 
             border_color="#00f2fe",
@@ -200,7 +200,7 @@ class TithingApp(ctk.CTk):
         scroll_frame = ctk.CTkScrollableFrame(pane, fg_color="#0d0e12", border_color="#2a2f3d", border_width=1, height=220)
         scroll_frame.pack(fill="both", expand=True, padx=20, pady=10)
 
-        lbl_hist_title = ctk.CTkLabel(scroll_frame, text="Transaction History Log", font=("Segoe UI", 14, "bold"), text_color="#ffffff")
+        lbl_hist_title = ctk.CTkLabel(scroll_frame, text="Transaction History Log", font=("Segoe UI", 14, "bold"), text_color="#ffffff") # List title
         lbl_hist_title.pack(anchor="w", padx=5, pady=5)
 
         for idx, entry in enumerate(self.records[month]["incomeEntries"]):
@@ -209,7 +209,7 @@ class TithingApp(ctk.CTk):
 
             log_lbl = ctk.CTkLabel(
                 row_frame, 
-                text=f"• [{entry['dateStr']}]  ${entry['amount']:,.2f}", 
+                text=f"• [{entry['dateStr']}]  ${entry['amount']:,.2f}", # Formatted history entry
                 font=("Segoe UI", 13), 
                 text_color="#c9d1d9"
             )
@@ -226,7 +226,7 @@ class TithingApp(ctk.CTk):
 
             btn_purge = ctk.CTkButton(
                 row_frame, 
-                text="Purge", 
+                text="Purge", # Item deletion button text
                 width=60,
                 height=24,
                 fg_color="#2c161a", 
@@ -244,19 +244,19 @@ class TithingApp(ctk.CTk):
         metrics_frame.pack(fill="x", padx=20, pady=15)
 
         gross_vol = self.get_total_income(month)
-        lbl_gross = ctk.CTkLabel(metrics_frame, text=f"Total Income: ${gross_vol:,.2f}", font=("Segoe UI", 14, "bold"), text_color="#ffffff")
+        lbl_gross = ctk.CTkLabel(metrics_frame, text=f"Total Income: ${gross_vol:,.2f}", font=("Segoe UI", 14, "bold"), text_color="#ffffff") # Total calculated income
         lbl_gross.pack(anchor="w")
 
         calc_rate = self.get_tithe_goal(month)
-        lbl_rate = ctk.CTkLabel(metrics_frame, text=f"Calculated Rate (10%): ${calc_rate:,.2f}", font=("Segoe UI", 13, "italic"), text_color="#8b949e")
+        lbl_rate = ctk.CTkLabel(metrics_frame, text=f"Calculated Rate (10%): ${calc_rate:,.2f}", font=("Segoe UI", 13, "italic"), text_color="#8b949e") # Precise decimal value
         lbl_rate.pack(anchor="w")
 
         target_alloc = self.get_tithe_goal_rounded(month)
-        lbl_alloc = ctk.CTkLabel(metrics_frame, text=f"Rounded Tithe: ${target_alloc}", font=("Segoe UI", 15, "bold"), text_color="#ff2e54")
+        lbl_alloc = ctk.CTkLabel(metrics_frame, text=f"Rounded Tithe: ${target_alloc}", font=("Segoe UI", 15, "bold"), text_color="#ff2e54") # Final rounded requirement
         lbl_alloc.pack(anchor="w", pady=(0, 5))
 
         if self.records[month]["lastPaidDate"]:
-            lbl_commit = ctk.CTkLabel(metrics_frame, text=f"Date Saved: {self.records[month]['lastPaidDate']}", font=("Segoe UI", 12, "italic"), text_color="#8b949e")
+            lbl_commit = ctk.CTkLabel(metrics_frame, text=f"Date Saved: {self.records[month]['lastPaidDate']}", font=("Segoe UI", 12, "italic"), text_color="#8b949e") # Last save timestamp
             lbl_commit.pack(anchor="w")
 
         # Bottom Command Operations Bar
@@ -269,7 +269,7 @@ class TithingApp(ctk.CTk):
 
         btn_commit = ctk.CTkButton(
             pane, 
-            text="Commit Metrics", 
+            text="Commit Metrics", # Save and close button text
             fg_color="#005f73", 
             text_color="#00f2fe", 
             border_color="#00f2fe",
@@ -282,7 +282,7 @@ class TithingApp(ctk.CTk):
 
         btn_back = ctk.CTkButton(
             pane, 
-            text="← Main Menu", 
+            text="← Main Menu", # Return navigation text
             width=100,
             fg_color="#0d0e12", 
             text_color="#8b949e", 
